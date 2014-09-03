@@ -7,6 +7,9 @@ cmd: bindgen -match epoll.h -o epoll.rs /usr/include/x86_64-linux-gnu/sys/epoll.
 extern crate libc;
 use libc::{ uint32_t, uint64_t };
 
+pub static EPOLL_CTL_ADD : ::libc::c_int = 1	/* Add a file decriptor to the interface.  */
+pub static EPOLL_CTL_DEL : ::libc::c_int = 2	/* Remove a file decriptor from the interface.  */
+pub static EPOLL_CTL_MOD : ::libc::c_int = 3	/* Change file decriptor epoll_event structure.  */
 
 pub static EPOLL_CLOEXEC: ::libc::c_uint = 524288;
 pub type Enum_EPOLL_EVENTS = ::libc::c_uint;

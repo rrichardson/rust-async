@@ -12,17 +12,18 @@ enum IOPollEvent {
 trait IOPoll {
   // add a new file descriptor to the polling mechanism to be monitored
   // events is an array of what events should be monitored for the fd
-  fn load(&self, subject: fd_t, events: &[IOPollEvent]),
+  fn load(&self, subject: fd_t, events: &[IOPollEvent]) -> bool,
 
   // remove a file descriptor from the polling mechanism
-  fn unload(&self, subject: fd_t),
+  fn unload(&self, subject: fd_t) -> bool,
 
   // modify the settings of the polling mechanism
-  fn modify(&self, subject: fd_t, events: &[IOPollEvent]),
+  fn modify(&self, subject: fd_t, events: &[IOPollEvent]) -> bool,
 
   // poll all of the supplied file descriptors for their defined events
   // timeout is how long to wait in milliseconds before giving up
   // subjects is a prepopulated array which will be filled with 
   // the filedescriptors which have events waiting
-  fn wait(&self, timeout: int, subjects: &mut[fd_t])
+  // returns the number of events collected
+  fn wait(&self, timeout: int, subjects: &mut[fd_t]) -> int
 }
